@@ -58,9 +58,12 @@ class LDA:
 
         for i in range(max_topic):
             if i % step == 0:
-                p = i + 1
+                if i == 0:
+                    p = 1
+                else:
+                    p = i
 
-                lda4 = LdaModel(self.corpus, id2word=self.dictionary, num_topics=i, iterations=400
+                lda4 = LdaModel(self.corpus, id2word=self.dictionary, num_topics=p, iterations=400
                                 , passes=30)
                 print('epoch', p)
                 cm = CoherenceModel(model=lda4, corpus=self.corpus, coherence='u_mass')
