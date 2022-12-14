@@ -49,5 +49,3 @@ class LDA:
                 continue
 
         return coherences, perplexities, passes
-
-    def tunning_topic_num(self, max_topic, step):
