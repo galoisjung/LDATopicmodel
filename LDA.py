@@ -8,7 +8,7 @@ from gensim.corpora.dictionary import Dictionary
 class LDA:
     def __init__(self, tokenized_doc):
         self.dictionary = corpora.Dictionary(tokenized_doc)
-        self.dictionary.filter_extremes(no_below=20)
+        self.dictionary.filter_extremes(no_below=10, no_above=0.05)
         self.corpus = [self.dictionary.doc2bow(text) for text in tokenized_doc]
 
     def making_LDA(self, topic_num, chunksize, iterations, passes, eval_every):
