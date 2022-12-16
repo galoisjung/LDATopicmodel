@@ -63,17 +63,16 @@ class LDA:
                     continue
                 else:
                     p = i
-
-                lda = self.making_LDA(p, 9000, 400, 30, 10)
-                print('epoch', p)
-                cm = CoherenceModel(model=lda, corpus=self.corpus, coherence='u_mass')
-                coherence = cm.get_coherence()
-                print("Coherence", coherence)
-                coherences.append(coherence)
-                print("Perplexity", lda.log_perplexity(self.corpus), '\n\n')
-                perplexities.append(lda.log_perplexity(self.corpus))
-                topic.append(p)
-                ldamodel.append(lda)
+                    lda = self.making_LDA(p, 9000, 400, 30, 10)
+                    print('epoch', p)
+                    cm = CoherenceModel(model=lda, corpus=self.corpus, coherence='u_mass')
+                    coherence = cm.get_coherence()
+                    print("Coherence", coherence)
+                    coherences.append(coherence)
+                    print("Perplexity", lda.log_perplexity(self.corpus), '\n\n')
+                    perplexities.append(lda.log_perplexity(self.corpus))
+                    topic.append(p)
+                    ldamodel.append(lda)
 
             else:
                 continue
