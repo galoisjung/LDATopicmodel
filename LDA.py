@@ -60,7 +60,7 @@ class LDA:
         for i in range(max_topic):
             if i % step == 0:
                 if i == 0:
-                    p = 1
+                    continue
                 else:
                     p = i
 
