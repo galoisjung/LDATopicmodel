@@ -54,7 +54,8 @@ class LDA:
 
         coherences = []
         perplexities = []
-        passes = []
+        topic = []
+        ldamodel = []
 
         for i in range(max_topic):
             if i % step == 0:
@@ -63,17 +64,18 @@ class LDA:
                 else:
                     p = i
 
-                lda4 = LdaModel(self.corpus, id2word=self.dictionary, num_topics=p, iterations=400
-                                , passes=30)
+                lda = self.making_LDA(p, 9000, 400, 30, 10)
                 print('epoch', p)
-                cm = CoherenceModel(model=lda4, corpus=self.corpus, coherence='u_mass')
+                cm = CoherenceModel(model=lda, corpus=self.corpus, coherence='u_mass')
                 coherence = cm.get_coherence()
                 print("Coherence", coherence)
                 coherences.append(coherence)
-                print("Perplexity", lda4.log_perplexity(self.corpus), '\n\n')
-                perplexities.append(lda4.log_perplexity(self.corpus))
-                passes.append(p)
+                print("Perplexity", lda.log_perplexity(self.corpus), '\n\n')
+                perplexities.append(lda.log_perplexity(self.corpus))
+                topic.append(p)
+                ldamodel.append(lda)
+
             else:
                 continue
 
-        return coherences, perplexities, passes
+        return [i for i in zip(topic, coherences, perplexities, ldamodel)]
